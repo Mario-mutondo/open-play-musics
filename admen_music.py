@@ -14,17 +14,14 @@ from mutagen.mp3 import MP3
 from utils.music_utilities import get_files_inside_directory_not_recursive, play_sound, is_sound_playing, pause_sounds, stop_sounds, unpause
 
 
-#list of music
 #=====================================================================FUNCTIONS=======================
-#tkinter allow us to use the function command to store logic of button
-#we will use pygame or playsound to play a music
 #note pygame dont support mp3 file, but playsound support it
 while True:
     win = theme.ThemedTk()
     win.set_theme("black")
-    win.title("Admen play music")
+    win.title("open play music")
 
-    win.geometry("800x730")
+    win.geometry("800x650")
     infomu = tk.StringVar()
     main_label = tk.Label(win, width=800, height=730, bg="black")
 
@@ -40,8 +37,6 @@ while True:
     #====================================music info ===========================================
     def start_count(t):
         global paused
-        # mixer.music.get_busy(): - Returns FALSE when we press the stop button (music stop playing)
-        # Continue - Ignores all of the statements below it. We check if music is paused or not.
         current_time = 0
         while current_time <= t and is_sound_playing():
             if not is_sound_playing():
@@ -54,6 +49,7 @@ while True:
                 currenttimelabel['text'] = timeformat
                 time.sleep(1)
                 current_time += 1
+
     def show_details(song):
         file_data = os.path.splitext(song)
 
@@ -99,6 +95,7 @@ while True:
         inf = music.split("/")
         inf = inf[-1]
         infomu.set(inf)
+
     def play():
         try:
             if is_sound_playing():
@@ -154,6 +151,7 @@ while True:
             pause_sounds()
         else:
             unpause()"""
+
     def back():
         try:
             statusbar.configure(fg="white")
@@ -209,7 +207,7 @@ while True:
 
     def about_us():
         msg.showinfo('about admen play music',
-        'by Mario Mutondo instagram.com>mario mutondo and -youtube.com/devaprender')
+        'by Mario Mutondo, [o seu nome]')
 
 
     subMenu = tk.Menu(menubar, tearoff=0)
@@ -248,16 +246,16 @@ while True:
     muted_image = ImageTk.PhotoImage(muted_image)
 
     scale = ttk.Scale(plusframe, from_=0, to=100, orient=tk.HORIZONTAL, command=set_vol)
-    scale.set(70)  # implement the default value of scale when music player starts
+    scale.set(70)  #valor padrao de volume quando a musica comecar
     mixer.music.set_volume(0.7)
 
     volume_image_label = tk.Button(plusframe, image=volume_image, bg="black", command=mute_music)
     volume_image_label.image = volume_image
-    volume_image_label.pack(side=tk.LEFT, expand=1, fill=tk.X, padx=(0, 182))
+    volume_image_label.pack(side=tk.LEFT, expand=1, fill=tk.X, padx=(0, 182), pady=(0, 1))
     scale.pack(side=tk.RIGHT, fill=tk.X)
-    plusframe.pack(side=tk.BOTTOM, expand=1)
+    plusframe.pack(pady=0)
 
-    statusbar = tk.Label(main_label, text="Africa/Moçambique", relief=tk.SUNKEN, anchor=tk.W, bg='black', fg="white", font='Times 10 italic')
+    statusbar = tk.Label(main_label, text="...", relief=tk.SUNKEN, anchor=tk.W, bg='black', fg="white", font='Times 10 italic')
     statusbar.pack(side=tk.BOTTOM, fill=tk.X)
 
     lengthlabel = tk.Label(music_info_label, text='00:00', fg="white", bg="black", font='Times 10 italic')
